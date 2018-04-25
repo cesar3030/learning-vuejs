@@ -2,19 +2,20 @@
  <div class='container'>
   <h1>{{ name }}</h1>
   <div class='row'>
-    <input type="text" v-model="todo"/>
-    <select v-model="severity">
-      <option value="" disabled>Choose Severity</option>
-      <option value="1">Critical</option>
-      <option value="2">Medium</option>
-      <option value="3">Low</option>
-    </select>
-    <p>Adding: {{ todo }} -> {{ severity }}</p> 
-    <button v-on:click="addTodo()">Add</button>
+    <form @submit.prevent="addTodo">
+      <input type="text" v-model="todo"/>
+      <select v-model="severity">
+        <option value="" disabled>Choose Severity</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <p>Adding: {{ todo }} -> {{ severity }}</p> 
+    </form>
   </div>
   <div class='row'>
     <ul id="todoList">
-      <li v-for="(data, index) in todos" :key="index">{{ index }}: {{ data.title }} <i class="material-icons" v-on:click="deleteTodo(index)">delete</i></li>
+      <li v-bind:class="data.severity" v-for="(data, index) in todos" :key="index">{{ index }}: {{ data.title }} <i class="material-icons" v-on:click="deleteTodo(index)">delete</i></li>
     </ul>
   </div>
  </div>
@@ -29,9 +30,9 @@ export default {
   data() {
     return {
       todos:[
-        {title: 'Bring wetsuit', severity: 3},
-        {title: 'Sim Card', severity: 2},
-        {title: 'Passport', severity: 1},
+        {title: 'Bring wetsuit', severity: 'low'},
+        {title: 'Sim Card', severity: 'medium'},
+        {title: 'Passport', severity: 'high'},
       ],
       todo: '',
       severity: ''
@@ -40,7 +41,7 @@ export default {
   methods: {
     addTodo() {
       console.log(this.todo)
-      this.todos.push({ title: this.todo, severity: 3 })
+      this.todos.push({ title: this.todo, severity: this.severity })
       this.todo = ''
       this.severity = ''
     },
@@ -78,8 +79,19 @@ export default {
   height: 40px;
   margin-top: 10px;
   padding: 10px;
-  background-color: #d6d6d6;
   width: 100%;
+}
+
+#todoList > li.low {
+  background-color: #ffff0259;
+}
+
+#todoList > li.medium{
+  background-color: #ffa5024a;
+}
+
+#todoList > li.high {
+  background-color: #ff000042;
 }
 
 #todoList > li > i {
