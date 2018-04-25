@@ -14,7 +14,7 @@
   </div>
   <div class='row'>
     <ul id="todoList">
-      <li v-for="(data, index) in todos" :key="index"> {{ index }}: {{ data.title }}</li>
+      <li v-for="(data, index) in todos" :key="index"><div class="text-center">{{ index }}: {{ data.title }}</div></li>
     </ul>
   </div>
  </div>
@@ -55,15 +55,25 @@ export default {
   margin: auto;
   background-color: #f3f3f3;
   min-height: 400px;
-  padding-top: 15px;
+  padding: 15px 0px 40px;
 }
 
 #todoList {
-  float: left;
+  width: 85%;
 }
+
 #todoList > li{
   text-align: left;
   display: block;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  height: 40px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #d6d6d6;
+  width: 100%;
+  line-height: 43px;
 }
 
 .row {
