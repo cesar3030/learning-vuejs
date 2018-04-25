@@ -14,7 +14,7 @@
   </div>
   <div class='row'>
     <ul id="todoList">
-      <li v-for="(data, index) in todos" :key="index"><div class="text-center">{{ index }}: {{ data.title }}</div></li>
+      <li v-for="(data, index) in todos" :key="index">{{ index }}: {{ data.title }} <i class="material-icons" v-on:click="deleteTodo(index)">delete</i></li>
     </ul>
   </div>
  </div>
@@ -43,6 +43,9 @@ export default {
       this.todos.push({ title: this.todo, severity: 3 })
       this.todo = ''
       this.severity = ''
+    },
+    deleteTodo(index){
+      this.todos.splice(index,1)
     }
   }
 }
@@ -62,6 +65,10 @@ export default {
   width: 85%;
 }
 
+#todoList > li, i {
+  line-height: 43px;
+}
+
 #todoList > li{
   text-align: left;
   display: block;
@@ -73,8 +80,13 @@ export default {
   padding: 10px;
   background-color: #d6d6d6;
   width: 100%;
-  line-height: 43px;
 }
+
+#todoList > li > i {
+  float: right;
+  cursor: pointer;
+}
+
 
 .row {
   margin-top: 10px;
