@@ -1,7 +1,17 @@
 <template>
  <div class='container'>
   <h1>{{ name }}</h1>
-  <div class='row'></div>
+  <div class='row'>
+    <input type="text" v-model="todo"/>
+    <select v-model="severity">
+      <option value="" disabled>Choose Severity</option>
+      <option value="1">Critical</option>
+      <option value="2">Medium</option>
+      <option value="3">Low</option>
+    </select>
+    <p>Adding: {{ todo }} -> {{ severity }}</p> 
+    <button v-on:click="addTodo()">Add</button>
+  </div>
   <div class='row'>
     <ul id="todoList">
       <li v-for="(data, index) in todos" :key="index"> {{ index }}: {{ data.title }}</li>
@@ -22,7 +32,17 @@ export default {
         {title: 'Bring wetsuit', severity: 3},
         {title: 'Sim Card', severity: 2},
         {title: 'Passport', severity: 1},
-      ]
+      ],
+      todo: '',
+      severity: ''
+    }
+  },
+  methods: {
+    addTodo() {
+      console.log(this.todo)
+      this.todos.push({ title: this.todo, severity: 3 })
+      this.todo = ''
+      this.severity = ''
     }
   }
 }
