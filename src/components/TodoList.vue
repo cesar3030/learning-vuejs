@@ -46,7 +46,9 @@ export default {
       this.severity = ''
     },
     deleteTodo(index){
-      this.todos.splice(index,1)
+      if(confirm('Do you really want to delete: ' + this.todos[index].title)){
+        this.todos.splice(index,1)
+      }
     }
   }
 }
