@@ -40,10 +40,11 @@ export default {
   },
   methods: {
     addTodo() {
-      console.log(this.todo)
-      this.todos.push({ title: this.todo, severity: this.severity })
-      this.todo = ''
-      this.severity = ''
+      if(this.todo != '' && this.severity != ''){
+        this.todos.push({ title: this.todo, severity: this.severity })
+        this.todo = ''
+        this.severity = ''
+      }
     },
     deleteTodo(index){
       if(confirm('Do you really want to delete: ' + this.todos[index].title)){
